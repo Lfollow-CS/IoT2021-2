@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
 			char fbuf[BUF_SIZE];
 			int n;
 			if((fd=open(pwd,O_RDONLY))==-1){
-				fd=open('./test.html',O_RDONLY))
+				fd=open('./test.html',O_RDONLY);
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				printf("Not Found\n");
 			}
