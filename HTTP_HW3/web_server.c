@@ -52,39 +52,39 @@ int main(int argc, char *argv[]){
 		clnt_sock=accept(serv_sock, (struct sockaddr*)&clnt_adr, &adr_sz);
         if(clnt_sock==-1)
 			continue;
-        else
+        else{
 			puts("new client connected...");
-        
-        pid = fork();
-        if(pid == 0){
-            close(serv_sock);
-			char filename[BUF_SIZE];
-			char pwd[BUF_SIZE];
-			char* cmpstr;
-			memset(filename,0,BUF_SIZE);
-			//memset(pwd,0,BUF_SIZE);
-            str_len=read(clnt_sock, buf, BUF_SIZE);
-            if(str_len == 0 || str_len == -1)
-				error_handling("read() error");
-            else
-    		    buf[str_len]=0;
-			printf("a");
-			cmpstr = strstr(buf,"GET /");
-			cmpstr += 5;
-			int i = 0;
-			printf("b");
-			while(1){
-				if(cmpstr[i]==' '){
-					filename[i] = '\0';
-					break;
+			pid = fork();
+			if(pid == 0){
+				close(serv_sock);
+				char filename[BUF_SIZE];
+				char pwd[BUF_SIZE];
+				char* cmpstr;
+				memset(filename,0,BUF_SIZE);
+				//memset(pwd,0,BUF_SIZE);
+				str_len=read(clnt_sock, buf, BUF_SIZE);
+				if(str_len == 0 || str_len == -1)
+					error_handling("read() error");
+				else
+					buf[str_len]=0;
+				printf("a");
+				cmpstr = strstr(buf,"GET /");
+				cmpstr += 5;
+				int i = 0;
+				printf("b");
+				while(1){
+					if(cmpstr[i]==' '){
+						filename[i] = '\0';
+						break;
+					}
+					filename[i] = cmpstr[i];
+					i++;
+					printf("%c",filename[i]);
 				}
-				filename[i] = cmpstr[i];
-				i++;
-				printf("%c",filename[i]);
 			}
+			else
+				close(clnt_sock);
 		}
-		else
-			close(clnt_sock);
     }
 }
 
