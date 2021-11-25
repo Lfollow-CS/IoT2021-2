@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
             else
     		    buf[str_len]=0;
 			printf("%s",buf);
-			int i=0;
+			int i;
 			for(i=4;i<BUF_SIZE;i++){
 				if(buf[i] == ' '){
 					buf[i] = 0;
