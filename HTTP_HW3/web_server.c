@@ -86,28 +86,27 @@ int main(int argc, char *argv[]){
 			char fbuf[BUF_SIZE];
 			int n;
 			if((fd=open(pwd,O_RDONLY))==-1){
-				char errpwd[100];
-				getcwd(errpwd,BUF_SIZE);
-				strcat(errpwd,"/test.html");
-				printf("%s\n",errpwd);
-				fd = open(errpwd,O_RDONLY);
+				char* notfound_content[100] = "<h1>404 Not Found</h1>";
 				write(clnt_sock, notfound, sizeof(notfound)-1);
+				write(clnt_sock, notfound_content, sizeof(notfound_content)-1);
 				printf("Not Found\n");
 			}
-			else if(strstr(filename,".jpg")!=NULL){
-				write(clnt_sock, imgheader, sizeof(imgheader)-1);
-				printf("Found jpg\n");
-			}
-			else if(strstr(filename,".png")!=NULL){
-				write(clnt_sock, pngheader, sizeof(pngheader)-1);
-				printf("Found png\n");
-			}
-			else if(strstr(filename,".html")!=NULL){
-				write(clnt_sock, htmlheader, sizeof(htmlheader)-1);
-				printf("Found html\n");
-			}
-			while((n= read(fd,fbuf,BUF_SIZE))>0){
-				write(clnt_sock,fbuf,n);
+			else{
+				else if(strstr(filename,".jpg")!=NULL){
+					write(clnt_sock, imgheader, sizeof(imgheader)-1);
+					printf("Found jpg\n");
+				}
+				else if(strstr(filename,".png")!=NULL){
+					write(clnt_sock, pngheader, sizeof(pngheader)-1);
+					printf("Found png\n");
+				}
+				else if(strstr(filename,".html")!=NULL){
+					write(clnt_sock, htmlheader, sizeof(htmlheader)-1);
+					printf("Found html\n");
+				}
+				while((n= read(fd,fbuf,BUF_SIZE))>0){
+					write(clnt_sock,fbuf,n);
+				}
 			}
 			close(clnt_sock);
 			return 0;
