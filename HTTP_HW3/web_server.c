@@ -124,7 +124,7 @@ void read_childproc(int sig)
 	pid_t pid;
 	int status;
 	pid=waitpid(-1, &status, WNOHANG);
-	printf("removed proc id: %d \n", pid);
+	printf("removed proc id: %d \n\n", pid);
 }
 void error_handling(char *message)
 {
