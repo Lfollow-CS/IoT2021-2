@@ -78,8 +78,8 @@ int main(int argc, char *argv[]){
 				}
 				filename[i] = cmpstr[i];
 				i++;
+				print("%c",filename[i]);
 			}
-			printf("%s",filename);
 		}
 		else
 			close(clnt_sock);
