@@ -73,8 +73,10 @@ int main(int argc, char *argv[]){
 			cmpstr += 5;
 			int i = 0;
 			while(1){
-				if(cmpstr[i]==' ')
+				if(cmpstr[i]==' '){
 					filename[i] = '\0';
+					break;
+				}
 				filename[i] = cmpstr[i];
 				i++;
 			}
