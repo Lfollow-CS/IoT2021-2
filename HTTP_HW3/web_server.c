@@ -101,6 +101,7 @@ int main(int argc, char *argv[]){
 				write(clnt_sock,fbuf,n);
 			}
 			close(clnt_sock);
+			return 0;
 		}
 		else
 			close(clnt_sock);
