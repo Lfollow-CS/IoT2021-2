@@ -89,7 +89,7 @@ int main(int argc, char *argv[]){
 				printf("Not Found");
 			}
 			int n 
-			int abc = open("./test.html",O_RDONLY))
+			int abc = open("./test.html",O_RDONLY);
 			while((n= read(abc,fbuf,BUF_SIZE))>0)
 				write(clnt_sock,fbuf,n);
 			close(clnt_sock);
