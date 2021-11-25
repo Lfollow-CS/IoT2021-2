@@ -88,7 +88,7 @@ int main(int argc, char *argv[]){
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				printf("Not Found");
 			}
-			int n 
+			int n;
 			int abc = open("./test.html",O_RDONLY);
 			while((n= read(abc,fbuf,BUF_SIZE))>0)
 				write(clnt_sock,fbuf,n);
