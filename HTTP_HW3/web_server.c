@@ -72,8 +72,8 @@ int main(int argc, char *argv[]){
             else
     		    buf[str_len]=0;
 
-			cmpstr = strstr(buf, "GET /");
-			cmpstr += 5;
+			cmpstr = strstr(buf, "GET ");
+			cmpstr += 4;
 			int i = 0;
 			while(1){
 				if(cmpstr[i]==' '){
@@ -84,7 +84,6 @@ int main(int argc, char *argv[]){
 				i++;
 			}
 			getcwd(pwd, BUF_SIZE);
-			strcat(pwd, "/");
 			strcat(pwd, filename);
 
 			if((fd = open(pwd, O_RDONLY))==-1){
