@@ -13,7 +13,7 @@
 char imgheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/jpg\r\n\r\n";
 char pngheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/png\r\n\r\n";
 char htmlheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: text/html\r\n\r\n";
-char notfound[] = "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n";
+char notfound[] = "HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n";
 
 void error_handling(char *message);
 void read_childproc(int sig);
