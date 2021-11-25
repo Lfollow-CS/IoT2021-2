@@ -32,6 +32,7 @@ int main(int argc, char *argv[]){
 		printf("Usage : %s <port>\n", argv[0]);
 		exit(1);
 	}
+	
     act.sa_handler=read_childproc;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags=0;
@@ -109,14 +110,15 @@ int main(int argc, char *argv[]){
 
 			while((str_len = read(fd, buf, BUF_SIZE))>0){
 				write(clnt_sock, buf, str_len);
-			}
-			
+			}	
 			close(clnt_sock);
 			return 0;
 		}
 		else
 			close(clnt_sock);
     }
+	close(serv_sock);
+	return 0;
 }
 
 void read_childproc(int sig)
