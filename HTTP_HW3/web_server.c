@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
         pid = fork();
         if(pid == 0){
             close(serv_sock);
-			
+
 			char filename[BUF_SIZE];
 			char pwd[100];
 			char errpwd[100];
@@ -93,19 +93,19 @@ int main(int argc, char *argv[]){
 				fd = open(errpwd, O_RDONLY);
 
 				write(clnt_sock, notfound, sizeof(notfound)-1);
-				printf("Not Found\n");
+				printf("* Not Found *\n");
 			}
 			else if(strstr(filename, ".jpg")!=NULL){
 				write(clnt_sock, imgheader, sizeof(imgheader)-1);
-				printf("Found jpg\n");
+				printf("* Found jpg *\n");
 			}
 			else if(strstr(filename, ".png")!=NULL){
 				write(clnt_sock, pngheader, sizeof(pngheader)-1);
-				printf("Found png\n");
+				printf("* Found png *\n");
 			}
 			else if(strstr(filename, ".html")!=NULL){
 				write(clnt_sock, htmlheader, sizeof(htmlheader)-1);
-				printf("Found html\n");
+				printf("* Found html *\n");
 			}
 
 			while((str_len = read(fd, buf, BUF_SIZE))>0){
