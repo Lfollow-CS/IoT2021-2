@@ -62,10 +62,12 @@ int main(int argc, char *argv[]){
 				char* cmpstr;
 				memset(filename,0,BUF_SIZE);
 				//memset(pwd,0,BUF_SIZE);
+				printf("1");
 				str_len=read(clnt_sock, buf, BUF_SIZE);
 				if(str_len == 0 || str_len == -1)
 					error_handling("read() error");
 				else
+					printf("2");
 					buf[str_len]=0;
 				printf("a");
 				cmpstr = strstr(buf,"GET /");
