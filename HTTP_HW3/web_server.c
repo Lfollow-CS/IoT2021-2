@@ -68,9 +68,11 @@ int main(int argc, char *argv[]){
 				error_handling("read() error");
             else
     		    buf[str_len]=0;
+			printf("a");
 			cmpstr = strstr(buf,"GET /");
 			cmpstr += 5;
 			int i = 0;
+			printf("b");
 			while(1){
 				if(cmpstr[i]==' '){
 					filename[i] = '\0';
