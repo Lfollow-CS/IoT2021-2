@@ -54,6 +54,7 @@ int main(int argc, char *argv[]){
 			continue;
         else{
 			puts("new client connected...");
+			printf("0");
 			pid = fork();
 			if(pid == 0){
 				close(serv_sock);
