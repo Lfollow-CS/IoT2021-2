@@ -20,7 +20,7 @@ void read_childproc(int sig);
 int main(int argc, char *argv[]){
     int serv_sock, clnt_sock;
 	struct sockaddr_in serv_adr, clnt_adr;
-	int fds[2];
+	int fd;
 	
     pid_t pid;
 	struct sigaction act;
@@ -59,6 +59,8 @@ int main(int argc, char *argv[]){
         if(pid == 0){
             close(serv_sock);
 			char filename[BUF_SIZE];
+			char pwd[100];
+			char* cmpstr;
 			memset(filename,0,BUF_SIZE);
             str_len=read(clnt_sock, buf, BUF_SIZE);
             if(str_len == 0 || str_len == -1)
@@ -66,15 +68,26 @@ int main(int argc, char *argv[]){
             else
     		    buf[str_len]=0;
 			printf("%s",buf);
-			int i;
-			for(i=4;i<BUF_SIZE;i++){
-				printf("%c",buf[i]);
-				if(buf[i] == ' '){
-					buf[i] = 0;
+			cmpstr = strstr(buf,"GET /");
+			cmpstr += 5;
+			int i = 0;
+			while(1){
+				if(cmpstr[i]==' '){
+					filename[i] = '\0';
 					break;
 				}
+				filename[i] = cmpstr[i];
+				i++;
 			}
-			printf("%s",buf);
+			getcwd(pwd,BUF_SIZE);
+			strcat(pwd,"/");
+			strcat(pwd,filename);
+			char fbuf[BUF_SIZE];
+			if((fd=open(pwd,O_RDONLY))==-1){
+				write(clnt_sock, notfound, sizeof(notfound)-1);
+				printf("Not Found");
+			}
+			close(clnt_sock);
 		}
 		else
 			close(clnt_sock);
