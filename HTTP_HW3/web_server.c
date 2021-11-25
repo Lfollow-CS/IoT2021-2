@@ -9,9 +9,10 @@
 
 #define BUF_SIZE 1024
 
-char imgheader[] = "HTTP/1.1 200 Ok\r\n" "Content-Type: image/jpg\r\n\r\n";
-char pngheader[] = "HTTP/1.1 200 Ok\r\n" "Content-Type: image/png\r\n\r\n";
-char htmlheader[] = "HTTP/1.1 200 Ok\r\n" "Content-Type: text/html\r\n\r\n";
+char imgheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/jpg\r\n\r\n";
+char pngheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/png\r\n\r\n";
+char htmlheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: text/html\r\n\r\n";
+char notfound[] = "HTTP/1.1 404 Not Found Ok\r\nContent-Type: text/html\r\nContent-Length: 137\r\n";
 
 void error_handling(char *message);
 void read_childproc(int sig);
@@ -58,19 +59,26 @@ int main(int argc, char *argv[]){
         if(pid == 0){
             close(serv_sock);
 			char filename[BUF_SIZE];
+			char pwd[BUF_SIZE];
+			char cmpstr[BUF_SIZE];
 			memset(filename,0,BUF_SIZE);
+			memset(pwd,0,BUF_SIZE);
+			memset(cmpstr,0,BUF_SIZE);
             str_len=read(clnt_sock, buf, BUF_SIZE);
             if(str_len == 0 || str_len == -1)
 				error_handling("read() error");
             else
     		    buf[str_len]=0;
-			printf("%s",buf);
-			// for(int i=4;i<BUF_SIZE;i++){
-			// 	if(buf[i]==' '){
-			// 		buf[i] = 0;
-			// 		break;
-			// 	}
-			// }
+			cmpstr = strstr(buf,"GET /")
+			cmpstr += 5;
+			int i = 0;
+			while(1){
+				if(cmpstr[i]==' ')
+					filename[i] = '\0'
+				filename[i] = cmpstr[i];
+				i++;
+			}
+			print("%s",filename);
 		}
 		else
 			close(clnt_sock);
