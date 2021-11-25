@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
             close(serv_sock);
 			char filename[BUF_SIZE];
 			char pwd[BUF_SIZE];
-			char cmpstr[BUF_SIZE];
+			char* cmpstr;
 			memset(filename,0,BUF_SIZE);
 			memset(pwd,0,BUF_SIZE);
 			memset(cmpstr,0,BUF_SIZE);
