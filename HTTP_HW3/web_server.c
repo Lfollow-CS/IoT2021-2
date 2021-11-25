@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
 				}
 				filename[i] = cmpstr[i];
 				i++;
-				print("%c",filename[i]);
+				printf("%c",filename[i]);
 			}
 		}
 		else
