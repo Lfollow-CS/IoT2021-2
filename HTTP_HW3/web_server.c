@@ -89,6 +89,7 @@ int main(int argc, char *argv[]){
 				char errpwd[100];
 				getcwd(errpwd,BUF_SIZE);
 				strcat(errpwd,"/test.html");
+				printf("%s\n",errpwd);
 				fd = open(errpwd,O_RDONLY);
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				printf("Not Found\n");
