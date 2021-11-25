@@ -68,7 +68,6 @@ int main(int argc, char *argv[]){
 				error_handling("read() error");
             else
     		    buf[str_len]=0;
-			printf("%s",buf);
 			cmpstr = strstr(buf,"GET /");
 			cmpstr += 5;
 			int i = 0;
@@ -91,7 +90,7 @@ int main(int argc, char *argv[]){
 			int n;
 			int abc = open("./test.html",O_RDONLY);
 			while((n= read(abc,fbuf,BUF_SIZE))>0)
-				print("%s",fbuf);
+				printf("%s",fbuf);
 				write(clnt_sock,fbuf,n);
 			close(clnt_sock);
 		}
