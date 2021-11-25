@@ -83,15 +83,23 @@ int main(int argc, char *argv[]){
 			strcat(pwd,"/");
 			strcat(pwd,filename);
 			char fbuf[BUF_SIZE];
+			int n;
 			if((fd=open(pwd,O_RDONLY))==-1){
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				printf("Not Found");
 			}
-			int n;
-			int abc = open("./test.html",O_RDONLY);
-			while((n= read(abc,fbuf,BUF_SIZE))>0)
-				printf("%s",fbuf);
+			else if(strstr(filename,".jpg")!=NULL){
+				write(clnt_sock, imgheader, sizeof(imgheader)-1);
+			}
+			else if(strstr(filename,".png")!=NULL){
+				write(clnt_sock, pngheader, sizeof(pngheader)-1);
+			}
+			else if(strstr(filename,".html")!=NULL){
+				write(clnt_sock, htmlheader, sizeof(htmlheader)-1);
+			}
+			while((n= read(fd,fbuf,BUF_SIZE))>0){
 				write(clnt_sock,fbuf,n);
+			}
 			close(clnt_sock);
 		}
 		else
