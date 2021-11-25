@@ -13,7 +13,8 @@
 char imgheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/jpg\r\n\r\n";
 char pngheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: image/png\r\n\r\n";
 char htmlheader[] = "HTTP/1.1 200 Ok\r\nContent-Type: text/html\r\n\r\n";
-char notfound[] = "HTTP/1.1 404 Not Found Ok\r\nContent-Type: text/html\r\nContent-Length: 137\r\n";
+char notfound[] = "HTTP/1.1 404 Not Found Ok\r\nContent-Type: text/html\r\nContent-Length: 137\r\n
+					";
 
 void error_handling(char *message);
 void read_childproc(int sig);
@@ -88,6 +89,10 @@ int main(int argc, char *argv[]){
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				printf("Not Found");
 			}
+			int n 
+			int abc =open("./test.html",O_RDONLY))==-1
+			while((n= read(abc,fbuf,BUF_SIZE))>0)
+				write(clnt_sock,fbuf,n);
 			close(clnt_sock);
 		}
 		else
