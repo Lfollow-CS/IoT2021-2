@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
 					break;
 				}
 			}
-			printf("%s",buf)
+			printf("%s",buf);
 		}
 		else
 			close(clnt_sock);
