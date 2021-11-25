@@ -82,20 +82,24 @@ int main(int argc, char *argv[]){
 			getcwd(pwd,BUF_SIZE);
 			strcat(pwd,"/");
 			strcat(pwd,filename);
+			printf("%s\n",pwd);
 			char fbuf[BUF_SIZE];
 			int n;
 			if((fd=open(pwd,O_RDONLY))==-1){
 				write(clnt_sock, notfound, sizeof(notfound)-1);
-				printf("Not Found");
+				printf("Not Found\n");
 			}
 			else if(strstr(filename,".jpg")!=NULL){
 				write(clnt_sock, imgheader, sizeof(imgheader)-1);
+				printf("Found jpg\n");
 			}
 			else if(strstr(filename,".png")!=NULL){
 				write(clnt_sock, pngheader, sizeof(pngheader)-1);
+				printf("Found png\n");
 			}
 			else if(strstr(filename,".html")!=NULL){
 				write(clnt_sock, htmlheader, sizeof(htmlheader)-1);
+				printf("Found html\n");
 			}
 			while((n= read(fd,fbuf,BUF_SIZE))>0){
 				write(clnt_sock,fbuf,n);
