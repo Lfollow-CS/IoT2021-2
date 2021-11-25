@@ -91,6 +91,7 @@ int main(int argc, char *argv[]){
 			int n;
 			int abc = open("./test.html",O_RDONLY);
 			while((n= read(abc,fbuf,BUF_SIZE))>0)
+				print("%s",fbuf);
 				write(clnt_sock,fbuf,n);
 			close(clnt_sock);
 		}
