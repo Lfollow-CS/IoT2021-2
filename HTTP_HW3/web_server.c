@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
 			char fbuf[BUF_SIZE];
 			int n;
 			if((fd=open(pwd,O_RDONLY))==-1){
-				char notfound_content[100] 
+				char notfound_content[100];
 				notfound_content = "<h1>404 Not Found</h1>";
 				write(clnt_sock, notfound, sizeof(notfound)-1);
 				write(clnt_sock, notfound_content, sizeof(notfound_content)-1);
