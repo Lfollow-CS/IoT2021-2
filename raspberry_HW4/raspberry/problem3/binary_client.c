@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 		printf("Usage : %s <IP> <port>\n", argv[0]);
 		exit(1);
 	}
-    // led에 연결할 gpio 번호 설정
+	// led에 연결할 gpio 번호 설정
 	int led0 = 5;
 	int led1 = 6;
 	int led2 = 13;
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	gpioSetMode(led[1], PI_OUTPUT);
 	gpioSetMode(led[2], PI_OUTPUT);
 	gpioSetMode(led[3], PI_OUTPUT);
-
+	
 	// 소켓 생성
     sock=socket(PF_INET, SOCK_STREAM, 0);   
 	if(sock==-1)
@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
 	else
 		puts("Connected...........");
 
+    
 	// 현재 표시할 숫자를 저장하는 변수
 	int num = 0;
     while(1) {
@@ -59,7 +60,6 @@ int main(int argc, char *argv[])
 		str_len=read(sock, move, BUF_SIZE);
 		move[str_len]=0;
 		printf("Message from server: %s", move);
-
 		// 메세지 내에서 이동할 양을 추출
 		int i = 2;
 		int j = 0;
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 		if(move[0] == 'u') {
 			num += atoi(how);
 			// num이 16보다 클 때 처리
-			else if(num >= 16)
+			if(num >= 16)
 				num = num % 16;
 			gpioDelay(10000);
 			printf("binary number : %d\n", num);
@@ -89,13 +89,13 @@ int main(int argc, char *argv[])
 			gpioDelay(10000);
 			printf("binary number : %d\n", num);
 		}
-		// 종료시그널은 q, Q 로 설정
-		else if(move[0] == 'q' || move[0] == 'Q'){
+		// 서버로부터 q, Q 수신 시 종료
+		else if(move[0] == 'q' || move[0] == 'Q' || str_len == 0){
 			printf("\nServer Send End Signal\n");
 			printf("End Connection\n");
 			break;
 		}
-		
+
 		// 비트 연산을 통해 LED 표시
 		for(i = 3;i >= 0; i--){
 			int result = num >> i & 1;

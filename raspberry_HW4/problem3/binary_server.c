@@ -108,7 +108,7 @@ int main(int argc, char *argv[]){
 					printf("check second argument, please input natural number.\n");
 					continue;
 				}
-				// 서버로 move의 내용 그대로 전송
+				// 클라이언트로 move의 내용 그대로 전송
 				write(clnt_sock, move, sizeof(move));
 			}
 			close(clnt_sock);

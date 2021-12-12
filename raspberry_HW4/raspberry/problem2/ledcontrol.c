@@ -33,7 +33,7 @@ int main(){
 	FD_ZERO(&readfds);
 	FD_SET(0, &readfds);
 	max_fd = 0;
-	printf("Press q of Q to QUIT\n");
+	printf("Press q or Q to QUIT\n");
 
 	// 밝기 단계 변수
 	int num = 1;
@@ -45,21 +45,25 @@ int main(){
 			// num이 10보다 클 때 처리 
 			if(num > 10)
 				num = 10;
-			gpioDelay(delay);		
+			gpioDelay(delay);	
+			printf("led level : %d\n", num);	
 		}
 		else if(gpioRead(down) == 0) {
 			num--;
-			// num이 0보다 작을 때 처리 
+			// num이 1보다 작을 때 처리 
 			if(num < 1)
 				num = 1;
-			gpioDelay(delay);		
+			gpioDelay(delay);	
+			printf("led level : %d\n", num);	
 		}
+
 		// duty 값을 100,000~1,000,000 사이를 10단계로 표시하므로
 		// 최소값인 100,000 * (단계=num)으로 표현 가능
 		duty = num * duty_min;
 
 		// 위에서 구한 duty 값으로 밝기 표현
-		gpioHardwarePWM(led, freq, duty);
+			
+		gpioHardwarePWM(led, freq, duty);	
 		
 		readtemp = readfds;
 		timeout.tv_sec = 0;
@@ -79,4 +83,3 @@ int main(){
 	
 	return 0;
 }
-
